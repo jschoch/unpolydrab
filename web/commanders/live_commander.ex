@@ -1,0 +1,65 @@
+defmodule DrabTestApp.LiveCommander do
+  require Logger
+  @moduledoc false
+  
+  use Drab.Commander, modules: [Drab.Live,Drab.Query]
+  # must insert view functions
+  # use DrabTestApp.Web, :view
+
+  onload :page_loaded
+
+  def page_loaded(socket) do
+    #DrabTestApp.IntegrationCase.add_page_loaded_indicator(socket)
+    #DrabTestApp.IntegrationCase.add_pid(socket)
+
+    # socket |> Drab.Query.insert("<h3 id='page_loaded_indicator'>Page Loaded</h3>", after: "#begin")
+    # socket |> Drab.Query.insert("<h5>Drab Broadcast Topic: #{__drab__().broadcasting |> inspect}</h5>", 
+    #   after: "#page_loaded_indicator")
+    # p = inspect(socket.assigns.__drab_pid)
+    # pid_string = Regex.named_captures(~r/#PID<(?<pid>.*)>/, p) |> Map.get("pid")
+    # socket |> Drab.Query.update(:text, set: pid_string, on: "#drab_pid")
+  end
+
+  def update_both(socket, _) do
+    poke socket, users: ["Mieczysław", "Andżelika", "Brajanek"], count: 3
+    # poke socket, count: 3
+    # poke socket, user: "dupa"
+    # poke socket, count: 42
+  end
+
+  def update_count(socket, _) do
+    # IO.inspect socket
+    poke socket, count: 42
+  end
+
+  def update_list(socket, _) do
+    poke socket, users: ["Mieczysław", "Andżelika", "Brajanek"]
+    # poke socket, user: "dupa"
+    # poke socket, count: 42
+  end
+
+  def update_mini(socket, sender) do
+    # list = peek(socket, :list) ++ ["Zdzisław", "Andżelika", "Brajanek"]
+    # IO.inspect peek(socket, :list)
+    # socket = poke socket, list: list
+    # IO.inspect peek(socket, :list)
+    IO.inspect sender
+    poke socket, class1: "btn", class2: "btn-warning", full_class: "btn btn-danger", hidden: !peek(socket, :hidden), list: [1,2,3]
+    # poke socket, hidden: false, class2: "btn-warning"
+  end
+
+  def do_login(socket, _sender) do
+    username = socket |> select(:val, from: "#username")
+    pass = socket |> select(:val, from: "#password")
+    Logger.warn "user and pass... :" <>  inspect {username, pass}
+    Drab.Live.poke socket, current_user: %{username: username}
+    socket |> exec_js("up.modal.close()");
+    socket
+  end
+
+  def logout(socket, _sender) do
+    Logger.warn socket.assigns["current_user"]["username"] <> " logout"
+    Drab.Live.poke socket, current_user: nil
+    socket
+  end
+end

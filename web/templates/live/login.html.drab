@@ -1,0 +1,40 @@
+<div class="login">
+<form2 class="form-horizontal">
+<fieldset>
+
+
+<!-- change col-sm-N to reflect how you would like your column spacing (http://getbootstrap.com/css/#forms-control-sizes) -->
+
+
+<!-- Form Name -->
+<legend>Login</legend>
+
+<!-- Text input http://getbootstrap.com/css/#forms -->
+<div class="form-group">
+  <label for="user" class="control-label col-sm-2"></label>
+  <div class="col-sm-10">
+    <input type="text" class="form-control" id="username" placeholder="<username>" required="">
+    
+  </div>
+</div>
+<!-- Text input http://getbootstrap.com/css/#forms -->
+<div class="form-group">
+  <label for="password" class="control-label col-sm-2"></label>
+  <div class="col-sm-10">
+    <input type="password" class="form-control" id="password" placeholder="<password>" required="">
+    
+  </div>
+</div>
+<!-- Button http://getbootstrap.com/css/#buttons -->
+<div class="form-group">
+  <label class="control-label col-sm-2" for="do_login"></label>
+  <div class="text-right col-sm-10">
+    <button drab-click="do_login" id="login_btn" name="login_btn" class="btn btn-primary" aria-label="">submit</button>
+    
+  </div>
+</div>
+
+
+</fieldset>
+</form2>
+</div>

@@ -1,0 +1,20 @@
+<%= if @current_user == nil do %>
+  <h1> Who are you? </h1>
+  <div class="login">
+    <a href="/login" up-modal=".drab">Please Login</a>
+  </div>
+
+<!--
+  <hr />
+  <h2>yuck</h2>
+  <%#= render "login.html" %>
+-->
+
+<% else %>
+
+  <h1> You are IN <%= inspect @current_user %> !!!!!!!!!!!!!!! 
+  <button drab-click="logout" class="alert alert-danger"> Logout </button>
+<% end %>
+
+
+

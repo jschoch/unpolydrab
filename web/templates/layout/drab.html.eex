@@ -1,0 +1,6 @@
+<div class="drab">
+  <main role="main">
+        <%= render @view_module, @view_template, assigns %>
+      </main>
+<%= Drab.Client.js(@conn) %>
+</div>
