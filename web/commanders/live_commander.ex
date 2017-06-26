@@ -58,8 +58,10 @@ defmodule DrabTestApp.LiveCommander do
   end
 
   def logout(socket, _sender) do
-    Logger.warn socket.assigns["current_user"]["username"] <> " logout"
+    #Logger.warn socket.assigns["current_user"]["username"] <> " logout"
+    Logger.warn "stuff..... " <> inspect socket.assigns
     Drab.Live.poke socket, current_user: nil
     socket
   end
+
 end
